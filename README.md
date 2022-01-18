@@ -1,5 +1,5 @@
-This is a basic skeleton, designed as a starting point for building Silverstripe 4 Extension modules.
+Adds the DB fields and CMS updates to a dataobject subclass (Page, Element, DataObject, etc) to provide a call-to-action link
 
-This does not represent a working module, just the bare-bones.   Once you have created a new repo for your module using this template, you'll need to edit (as a minimum) the composer.json file to set a name, namespace, etc.
+Needs template code to be added to the project, a sample is included in this module.
 
-Code should be added in the `src`directory, following PSR autoloading guidelines for namespaces, directory structure, etc.
+To use, once the module is installed, just apply it as an extension to the class you want to decorate.
