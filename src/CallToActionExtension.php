@@ -42,7 +42,7 @@ class CallToActionExtension extends DataExtension
                 ->setDescription('External link, email address, etc.')
                 ->displayIf("CTAType")->isEqualTo("External")
                 ->orIf("CTAType")->isEqualTo("Email")->end(),
-            TextField::create('LinkText')
+            TextField::create('LinkText')->displayUnless("CTAType")->isEqualTo("None")->end()
         ]);
         parent::updateCMSFields($fields);
     }
