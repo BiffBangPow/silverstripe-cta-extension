@@ -15,15 +15,15 @@ use UncleCheese\DisplayLogic\Forms\Wrapper;
 class CallToActionExtension extends DataExtension
 {
     private static $db = [
-        'LinkText'   => 'Varchar',
-        'CTAType'    => 'Enum("None,Link,Download,External,Email", "None")',
-        'LinkData'   => 'Varchar',
+        'LinkText' => 'Varchar',
+        'CTAType' => 'Enum("None,Link,Download,External,Email", "None")',
+        'LinkData' => 'Varchar',
         'LinkAnchor' => 'Varchar',
     ];
 
     private static $has_one = [
         'DownloadFile' => File::class,
-        'Action'       => SiteTree::class,
+        'Action' => SiteTree::class,
     ];
     private static $owns = [
         'DownloadFile',
@@ -62,8 +62,8 @@ class CallToActionExtension extends DataExtension
                 break;
             case 'Link':
                 $link = $this->owner->Action()->Link();
-                if ($this->owner->LinkAnchor !== '' && $this->owner->LinkAnchor !== null) {
-                    $link .= '#' . $this->owner->LinkAnchor;
+                if (($this->owner->LinkAnchor !== '') && ($this->owner->LinkAnchor !== null)) {
+                    $link .= '#' . trim($this->owner->LinkAnchor, '#');
                 }
                 break;
             case 'Download':
