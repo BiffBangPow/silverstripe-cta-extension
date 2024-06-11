@@ -24,9 +24,11 @@ class CallToActionExtension extends DataExtension
     private static $has_one = [
         'DownloadFile' => File::class,
         'Action' => SiteTree::class,
+        'VideoFile' => File::class
     ];
     private static $owns = [
         'DownloadFile',
+        'VideoFile'
     ];
 
     public function updateCMSFields(FieldList $fields)
@@ -42,11 +44,17 @@ class CallToActionExtension extends DataExtension
                 ->displayIf("CTAType")->isEqualTo("Link")->end(),
             UploadField::create('DownloadFile', 'Download File')->setFolderName('Downloads')
                 ->displayIf('CTAType')->isEqualTo("Download")->end(),
+            Wrapper::create(
+                UploadField::create('VideoFile')
+                    ->setFolderName('hero-video')
+                    ->setAllowedExtensions(['webm', 'mp4'])
+                    ->setDescription('Video should be in mp4 or webm format, does not need sound and should be ideally less than around 20 seconds')
+            )->displayIf("CTAType")->isEqualTo("Video")->end(),
             TextField::create('LinkData')
                 ->setDescription('External link, email address, etc.')
                 ->displayIf("CTAType")->isEqualTo("External")
                 ->orIf("CTAType")->isEqualTo("Email")->end(),
-            TextField::create('LinkText')->displayUnless("CTAType")->isEqualTo("None")->end(),
+            TextField::create('LinkText')->displayUnless("CTAType")->isEqualTo("None")->end()
         ]);
         parent::updateCMSFields($fields);
     }
