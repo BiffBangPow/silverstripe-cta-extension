@@ -16,7 +16,7 @@ class CallToActionExtension extends DataExtension
 {
     private static $db = [
         'LinkText' => 'Varchar',
-        'CTAType' => 'Enum("None,Link,Download,External,Email", "None")',
+        'CTAType' => 'Enum("None,Link,Download,External,Email,Video", "None")',
         'LinkData' => 'Varchar',
         'LinkAnchor' => 'Varchar',
     ];
@@ -33,7 +33,7 @@ class CallToActionExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->removeByName(['CTAType', 'DownloadFile', 'LinkData', 'LinkText', 'ActionID', 'LinkAnchor']);
+        $fields->removeByName(['CTAType', 'DownloadFile', 'LinkData', 'LinkText', 'ActionID', 'LinkAnchor', 'VideoFile']);
         $fields->addFieldsToTab('Root.Main', [
             DropdownField::create('CTAType', 'Call to action type',
                 singleton($this->owner->ClassName)->dbObject('CTAType')->enumValues()),
@@ -46,9 +46,9 @@ class CallToActionExtension extends DataExtension
                 ->displayIf('CTAType')->isEqualTo("Download")->end(),
             Wrapper::create(
                 UploadField::create('VideoFile')
-                    ->setFolderName('hero-video')
+                    ->setFolderName('video-content')
                     ->setAllowedExtensions(['webm', 'mp4'])
-                    ->setDescription('Video should be in mp4 or webm format, does not need sound and should be ideally less than around 20 seconds')
+                    ->setDescription('Video should be in mp4 or webm format, and as small as possible')
             )->displayIf("CTAType")->isEqualTo("Video")->end(),
             TextField::create('LinkData')
                 ->setDescription('External link, email address, etc.')
