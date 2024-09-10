@@ -15,9 +15,7 @@
     }
   ],
   "require": {
-    "silverstripe/vendor-plugin": "^1.0",
-    "silverstripe/cms": "^4",
-    "unclecheese/display-logic": "^2.0"
+    "unclecheese/display-logic": "^2.0 || ^3"
   },
   "autoload": {
     "psr-4": {
